@@ -1,4 +1,5 @@
 import { roundTo } from "./utils.ts";
+import { gcdBruteForce } from "./gcd.ts";
 
 export class Fraction {
   constructor(
@@ -39,6 +40,12 @@ export class Fraction {
     const newNumerator = this.numerator * other.denominator;
     const newDenominator = this.denominator * other.numerator;
     return new Fraction(newNumerator, newDenominator);
+  }
+
+  // Gibt einen gekürzten Bruch zurück
+  public cancel(): Fraction {
+    const gcd = gcdBruteForce(this.numerator, this.denominator);
+    return new Fraction(this.numerator / gcd, this.denominator / gcd);
   }
 
   public toFloat(precision: number): number {

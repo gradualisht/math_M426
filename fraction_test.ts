@@ -114,3 +114,28 @@ Deno.test("parse throws on denominator 0", () => {
     Fraction.parse("3 / 0");
   }, Error, "denominator must not be 0");
 });
+
+// cancel: Bruch kürzen
+Deno.test("cancel of 1/1 returns 1/1", () => {
+  const fraction = new Fraction(1, 1);
+
+  const result = fraction.cancel();
+
+  assertEquals(result.toString(), "1/1");
+});
+
+Deno.test("cancel of 2/4 returns 1/2", () => {
+  const fraction = new Fraction(2, 4);
+
+  const result = fraction.cancel();
+
+  assertEquals(result.toString(), "1/2");
+});
+
+Deno.test("cancel of 18/27 returns 2/3", () => {
+  const fraction = new Fraction(18, 27);
+
+  const result = fraction.cancel();
+
+  assertEquals(result.toString(), "2/3");
+});
